@@ -49,6 +49,9 @@ model.compile(loss='categorical_crossentropy',
 ```
 
 #The training result    
-I use 18000 training samples and 6000 test samples. After 64 epochs of training, the model obtains the correct rate of 63.9% on the test data.There is part of the result following:   
+I use 18000 training samples and 6000 test samples. After 64 epochs of training, the model obtains the correct rate of 63.9% on the test data.There is part of the result following:    
 
+![test_result](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/picture/test_result.jpg)  
+![4063](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/picture/9_4063.jpg)    
+![7229](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/picture/15_7229.jpg)   
 We can see the program successfully recognize "4063" , but fail "7229". The chat '7' and '2' are similar, maybe we need more data to train.
