@@ -10,10 +10,10 @@ There three main methods:
 
 Tesseract OCR and OpenCV use the second method. But the captcha is more and more complex now. There is a common phenomenon that the chars in the captcha interlace with one another, so the second method gets a low accuracy. This program focuses on the third method. 
 
-#generate the captcha to train
+#Generate the captcha to train
 Acquire massive capthca by hunman is unrealistic. Fortunately, we can easily generate the captcha by the python package **captcha**.See the [get_captcha.py](www.baidu.com) in details.
 
-#build the cnn model
+#Build the cnn model
 I build the network with [keras](https://github.com/fchollet/keras), using the theano backend. I think use keras raher than theano to code is much more convenient.     
 The network includes three convolution layers and two full-connected layers. Owing to CNN needs a large amount of samples to train, with the limitation of time and resources, I only use digital number as the char set of the captcha. So output of the model has 4*10 numbers, while is will have 4*62 numbers if the char set includes ppercase and lowercase letters.
 ```python
@@ -55,3 +55,9 @@ I use 18000 training samples and 6000 test samples. After 64 epochs of training,
 ![4063](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/picture/9_4063.jpg)    
 ![7229](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/picture/15_7229.jpg)   
 We can see the program successfully recognize "4063" , but fail "7229". The chat '7' and '2' are similar, maybe we need more data to train.
+
+#Try yourself
+##Environment
+My Environment is Windows10 with Anaconda. Anaconda should install the package theano,keras and capthca.
+##Run my program
+You can run my program by downloading my code(get_captcha.py, load_data.py and get_captcha.py), running get_captcha.py(create path 'F:\captcha\data' first) and running recognize_captcha.py. Program get_captcha.py will generate the captchas and Program recognize_captcha.py will build the model. I also provide training model file(my_model.json and my_model_weights.h5), you can load it directly and recognize the captcha around the corner.
