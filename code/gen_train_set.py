@@ -4,13 +4,11 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import random
 import os
+import captcha_params
 
-number = ['0','1','2','3','4','5','6','7','8','9']
-alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
 # generate  the captcha text randomly from the char lists above
-def random_captcha_text(char_set=number, captcha_size=4):
+def random_captcha_text(char_set=captcha_params.get_char_set(), captcha_size=captcha_params.get_captcha_size()):
 	captcha_text = []
 	for i in range(captcha_size):
 		c = random.choice(char_set)
@@ -31,7 +29,7 @@ def gen_captcha_text_and_image(i):
 	captcha = image.generate(captcha_text)
 
 	# naming rules: num(in order)+'_'+'captcha text'.include num is for avoiding the same name
-	image.write(captcha_text, path+str(i)+'_'+captcha_text + '.jpg') 
+	image.write(captcha_text, path+str(i)+'_'+captcha_text + '.png') 
  
 	captcha_image = Image.open(captcha)
 	captcha_image = np.array(captcha_image)
@@ -40,7 +38,7 @@ def gen_captcha_text_and_image(i):
 if __name__ == '__main__':
 
         
-        for i in range(25000):     
+        for i in range(250):     
                 text, image = gen_captcha_text_and_image(i)
 
         # show the image

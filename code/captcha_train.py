@@ -21,11 +21,13 @@ import h5py
 from keras.models import model_from_json
 from keras.callbacks import ModelCheckpoint
 
+import captcha_params
+
 batch_size = 128
 nb_epoch = 64
 
-MAX_CAPTCHA = 4
-CHAR_SET_LEN = 10
+MAX_CAPTCHA = captcha_params.get_captcha_size()
+CHAR_SET_LEN = captcha_params.get_char_set_len()
 
 # input image dimensions
 img_rows, img_cols = 60, 160
