@@ -33,7 +33,7 @@ CHAR_SET_LEN = captcha_params.get_char_set_len()
 
 
 # the data, shuffled and split between train and test sets
-(X_train, Y_train), (X_test, Y_test) = load_data(tol_num = 100,train_num = 2400)
+(X_train, Y_train), (X_test, Y_test) = load_data(tol_num = 2400,train_num = 2000)
 
 # i use the theano backend
 if K.image_dim_ordering() == 'th':

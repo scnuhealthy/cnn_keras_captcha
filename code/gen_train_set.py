@@ -17,7 +17,7 @@ def random_captcha_text(char_set=captcha_params.get_char_set(), captcha_size=cap
  
 # generate the captcha text and image and save the image 
 def gen_captcha_text_and_image(i):
-	image = ImageCaptcha()
+	image = ImageCaptcha(width=160, height=60, font_sizes=[30])
  
 	captcha_text = random_captcha_text()
 	captcha_text = ''.join(captcha_text)
