@@ -15,6 +15,8 @@ MAX_CAPTCHA = captcha_params.get_captcha_size()
 # the number of elements in the char set 
 CHAR_SET_LEN = captcha_params.get_char_set_len()
 
+CHAR_SET = captcha_params.get_char_set()
+
 
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
 # text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
@@ -25,16 +27,7 @@ def text2vec(text):
         # the shape of the vector is 1*(MAX_CAPTCHA*CHAR_SET_LEN)
 	vector = np.zeros(MAX_CAPTCHA*CHAR_SET_LEN)
 	def char2pos(c):
-		if c =='_':
-			k = 62
-			return k
-		k = ord(c)-48
-		if k > 9:
-			k = ord(c) - 55
-			if k > 35:
-				k = ord(c) - 61
-				if k > 61:
-					raise ValueError('No Map') 
+		k = CHAR_SET.index(c)
 		return k
 	for i, c in enumerate(text):
 		idx = i * CHAR_SET_LEN + char2pos(c)
