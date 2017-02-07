@@ -20,6 +20,7 @@ MAX_CAPTCHA = 4
 CHAR_SET_LEN = len(number)
 
 
+
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
 # text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
 def text2vec(text):
@@ -56,12 +57,12 @@ def load_data(tol_num,train_num):
     label = np.empty((tol_num,MAX_CAPTCHA*CHAR_SET_LEN),dtype="uint8")
 
     # data dir
-    imgs = os.listdir("F:/captcha//data")
+    imgs = os.listdir("data")
     
     for i in range(tol_num):
 
         # load the images and convert them into gray images
-        img = Image.open("F:/captcha//data//"+imgs[i]).convert('L')
+        img = Image.open("data/"+imgs[i]).convert('L')
         arr = np.asarray(img,dtype="float32")
         try:
             data[i,:,:,:] = arr
@@ -86,6 +87,14 @@ def load_data(tol_num,train_num):
     y_test = label[rr][train_num:]
     
     return (X_train,y_train),(X_test,y_test)
+
+def load_image(img):
+    tol_num = 1
+    data = np.empty((tol_num,1,60,160),dtype="float32")
+    img = Image.open(img).convert('L')
+    arr = np.asarray(img,dtype="float32")
+    data[0,:,:,:] = arr
+    return data
 
 # return the index of the max_num in the array
 def get_max(array):

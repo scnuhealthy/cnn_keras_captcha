@@ -24,9 +24,9 @@ def gen_captcha_text_and_image(i):
 	captcha_text = random_captcha_text()
 	captcha_text = ''.join(captcha_text)
 
-        path = 'F:/captcha//data//'
-        if os.path.exists(path) == False: # if the folder is not existed, create it
-                os.mkdir(path)
+	path = './data/'
+	if os.path.exists(path) == False: # if the folder is not existed, create it
+		os.mkdir(path)
                 
 	captcha = image.generate(captcha_text)
 
