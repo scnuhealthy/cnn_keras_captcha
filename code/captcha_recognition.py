@@ -118,6 +118,7 @@ for i in range(X_test.shape[0]):
         print (i,' predict: ',predict2)
 print('predict correctly: ',acc)
 print('total prediction: ',X_test.shape[0])
+print('Score: ',score)
 
 # save model
 # json_string = model.to_json()

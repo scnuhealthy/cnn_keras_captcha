@@ -63,39 +63,6 @@ print('X_test shape:', X_test.shape)
 print(X_test.shape[0], 'test samples')
 
 
-# In[4]:
-
-
-model = Sequential()
-
-
-# 3 conv layer
-model.add(Convolution2D(nb_filters1, kernel_size[0], kernel_size[1],
-                        border_mode='valid',
-                        input_shape=input_shape))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.25))
-
-model.add(Convolution2D(nb_filters2, kernel_size[0], kernel_size[1]))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.25))
-
-model.add(Convolution2D(nb_filters3, kernel_size[0], kernel_size[1]))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.25))
-
-# Fully connected layer
-model.add(Flatten())
-model.add(Dense(512))
-model.add(Activation('relu'))
-model.add(Dropout(0.25))
-model.add(Dense(MAX_CAPTCHA*CHAR_SET_LEN))
-model.add(Activation('softmax'))
-
-
 # load the trained model
 model = model_from_json(open('my_model.json').read())  
 model.load_weights('my_model_weights.h5')
