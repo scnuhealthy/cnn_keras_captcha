@@ -38,7 +38,7 @@ def gen_captcha_text_and_image(i):
 if __name__ == '__main__':
 
         
-        for i in range(250):     
+        for i in range(2500):     
                 text, image = gen_captcha_text_and_image(i)
 
         # show the image

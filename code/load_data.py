@@ -4,21 +4,16 @@ import os
 from PIL import Image
 import numpy as np
 import random
+import captcha_params
 
 np.random.seed(1337)
-
-number = ['0','1','2','3','4','5','6','7','8','9']
-alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-
 
 # load_data.py and captcha_recognition.py we need to define the MAX_CAPTCHA,the CHAR_SET_LEN ,the tol_num,the train_num and the parameters of the model
 
 # the length of the captcha text
-MAX_CAPTCHA = 4
+MAX_CAPTCHA = captcha_params.get_captcha_size()
 # the number of elements in the char set 
-CHAR_SET_LEN = len(number)
-
+CHAR_SET_LEN = captcha_params.get_char_set_len()
 
 
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1

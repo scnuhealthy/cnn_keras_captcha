@@ -12,8 +12,6 @@ import numpy as np
 np.random.seed(1337)  # for reproducibility
 
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Convolution2D, MaxPooling2D
 from keras.utils import np_utils
 from keras import backend as K
 from load_data import *
@@ -22,6 +20,10 @@ from keras.models import model_from_json
 from keras.callbacks import ModelCheckpoint
 
 import captcha_params
+import load_model
+
+# input image dimensions
+img_rows, img_cols = 60, 160
 
 batch_size = 128
 nb_epoch = 64
@@ -29,19 +31,9 @@ nb_epoch = 64
 MAX_CAPTCHA = captcha_params.get_captcha_size()
 CHAR_SET_LEN = captcha_params.get_char_set_len()
 
-# input image dimensions
-img_rows, img_cols = 60, 160
-# number of convolutional filters to use
-nb_filters1 = 32
-nb_filters2 = 64
-nb_filters3 = 64
-# size of pooling area for max pooling
-pool_size = (2, 2)
-# convolution kernel size
-kernel_size = (3, 3)
 
 # the data, shuffled and split between train and test sets
-(X_train, Y_train), (X_test, Y_test) = load_data(tol_num = 24000,train_num = 18000)
+(X_train, Y_train), (X_test, Y_test) = load_data(tol_num = 100,train_num = 2400)
 
 # i use the theano backend
 if K.image_dim_ordering() == 'th':
@@ -61,47 +53,13 @@ print('X_train shape:', X_train.shape)
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 
-
-model = Sequential()
-
-
-# 3 conv layer
-model.add(Convolution2D(nb_filters1, kernel_size[0], kernel_size[1],
-                        border_mode='valid',
-                        input_shape=input_shape))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.25))
-
-model.add(Convolution2D(nb_filters2, kernel_size[0], kernel_size[1]))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.25))
-
-model.add(Convolution2D(nb_filters3, kernel_size[0], kernel_size[1]))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.25))
-
-# Fully connected layer
-model.add(Flatten())
-model.add(Dense(512))
-model.add(Activation('relu'))
-model.add(Dropout(0.25))
-model.add(Dense(MAX_CAPTCHA*CHAR_SET_LEN))
-model.add(Activation('softmax'))
-
-
-weights_file = "my_model_weights.h5"
-# load the trained model
-model = model_from_json(open('my_model.json').read())  
-model.load_weights(weights_file)
+model = load_model.get_model(input_shape)
 
 model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
               metrics=['accuracy'])
 
-filepath=weights_file
+filepath = load_model.get_weights_file()
 checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
 callbacks_list = [checkpoint]
 
@@ -126,7 +84,3 @@ for i in range(X_test.shape[0]):
 print('predict correctly: ',acc)
 print('total prediction: ',X_test.shape[0])
 
-# save model
-json_string = model.to_json()
-open("my_model.json","w").write(json_string)
-model.save_weights(weights_file)
