@@ -2,6 +2,7 @@ import os.path
 from keras.models import Sequential
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.models import model_from_json
 import captcha_params
 
 
@@ -24,7 +25,7 @@ def get_model(input_shape):
     if os.path.exists(WEIGHT_FILE):
         # load the trained model
         model = model_from_json(open('my_model.json').read())  
-        model.load_weights(weights_file)
+        model.load_weights(WEIGHT_FILE)
 
     else:
         # 3 conv layer
