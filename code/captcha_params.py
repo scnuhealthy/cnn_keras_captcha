@@ -5,7 +5,7 @@ ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
 MAX_CAPTCHA = 3
 
 def get_char_set():
-	return ['0','1','2']
+	return number+alphabet
 
 def get_char_set_len():
 	return len(get_char_set())
