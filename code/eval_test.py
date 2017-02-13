@@ -1,8 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
 '''
 Author:kemo
 
@@ -12,26 +7,30 @@ Gets to 63.9% test accuracy after 64 epochs
 120 seconds per epoch on a Nvidia GeForce 940M GPU.
 '''
 
-
 from __future__ import print_function
 import numpy as np
 np.random.seed(1337)  # for reproducibility
 
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Convolution2D, MaxPooling2D
 from keras.utils import np_utils
 from keras import backend as K
 from load_data import *
 import h5py
 from keras.models import model_from_json
+from keras.callbacks import ModelCheckpoint
 import sys
+import captcha_params
+import load_model
+
+# input image dimensions
+img_rows, img_cols = 60, 160
 
 batch_size = 128
 nb_epoch = 64
 
-MAX_CAPTCHA = 4
-CHAR_SET_LEN = 10
+MAX_CAPTCHA = captcha_params.get_captcha_size()
+CHAR_SET_LEN = captcha_params.get_char_set_len()
+
 
 # input image dimensions
 img_rows, img_cols = 60, 160
@@ -82,7 +81,6 @@ model.compile(loss='categorical_crossentropy',
 
 
 # In[6]:
-
 predict = model.predict(X_test,batch_size = batch_size,verbose = 0)
 
 
@@ -95,7 +93,6 @@ for i in range(X_test.shape[0]):
     true = []
     predict2 = []
     for j in range(MAX_CAPTCHA):
-        #true.append(get_max(Y_test[i,CHAR_SET_LEN*j:(j+1)*CHAR_SET_LEN]))
         predict2.append(get_max(predict[i,CHAR_SET_LEN*j:(j+1)*CHAR_SET_LEN]))
     if true == predict2:
         acc+=1
@@ -104,4 +101,5 @@ for i in range(X_test.shape[0]):
         print (i,' predict: ',predict2)
 print('predict correctly: ',acc)
 print('total prediction: ',X_test.shape[0])
+print('Score: ',score)
 

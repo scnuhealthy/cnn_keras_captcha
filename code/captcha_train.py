@@ -25,10 +25,11 @@ import load_model
 img_rows, img_cols = 60, 160
 
 batch_size = 128
-nb_epoch = 64
+nb_epoch = 640
 
 MAX_CAPTCHA = captcha_params.get_captcha_size()
 CHAR_SET_LEN = captcha_params.get_char_set_len()
+
 
 
 # the data, shuffled and split between train and test sets
@@ -82,4 +83,5 @@ for i in range(X_test.shape[0]):
         print (i,' predict: ',predict2)
 print('predict correctly: ',acc)
 print('total prediction: ',X_test.shape[0])
+print('Score: ',score)
 

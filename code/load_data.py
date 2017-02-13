@@ -17,13 +17,15 @@ CHAR_SET_LEN = captcha_params.get_char_set_len()
 
 CHAR_SET = captcha_params.get_char_set()
 
+Y_LEN = captcha_params.get_y_len()
+
 
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
 # text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
 def text2vec(text):
 	text_len = len(text)
 	if text_len > MAX_CAPTCHA:
-		raise ValueError('max4')
+		raise ValueError(MAX_CAPTCHA)
         # the shape of the vector is 1*(MAX_CAPTCHA*CHAR_SET_LEN)
 	vector = np.zeros(MAX_CAPTCHA*CHAR_SET_LEN)
 	def char2pos(c):
@@ -34,6 +36,23 @@ def text2vec(text):
 		vector[idx] = 1
 	return vector
 
+
+# text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
+# text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
+def text2vec2(text):
+	text_len = len(text)
+	if text_len > MAX_CAPTCHA:
+		raise ValueError('max4')
+        # the shape of the vector is 1*(MAX_CAPTCHA*CHAR_SET_LEN)
+	vector = np.zeros(MAX_CAPTCHA)
+	def char2pos(c):
+		k = 30
+		return k
+	for i, c in enumerate(text):
+		idx = i
+		vector[idx] = char2pos(c)
+	return vector
+
 def load_data(tol_num,train_num):
       
     # input,tol_num: the numbers of all samples(train and test)
@@ -42,7 +61,7 @@ def load_data(tol_num,train_num):
     # ouput,(X_test,y_test):test data
  
     data = np.empty((tol_num,1,60,160),dtype="float32")
-    label = np.empty((tol_num,MAX_CAPTCHA*CHAR_SET_LEN),dtype="uint8")
+    label = np.empty((tol_num,Y_LEN),dtype="uint8")
 
     # data dir
     imgs = os.listdir("data")
@@ -56,13 +75,6 @@ def load_data(tol_num,train_num):
             data[i,:,:,:] = arr
             captcha_text = imgs[i].split('.')[0].split('_')[1]
             label[i]= text2vec(captcha_text)
-            '''
-            print captcha_text
-            print label[i,:10]
-            print label[i,10:20]
-            print label[i,20:30]
-            print label[i,30:40]
-            '''
         except:
             pass
 
@@ -90,4 +102,10 @@ def get_max(array):
     for i in range(len(array)):
         if array[i] == max_num:
             return i
-load_data(21,1)
+
+def get_text(array):
+    text = []
+    max_num = max(array)
+    for i in range(len(array)):
+        text.append(CHAR_SET[array[i]])
+    return text
