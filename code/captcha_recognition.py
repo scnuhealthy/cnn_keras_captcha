@@ -90,8 +90,8 @@ model.add(Activation('softmax'))
 
 
 # load the trained model
-model = model_from_json(open('my_model.json').read())  
-model.load_weights('my_model_weights.h5')
+# model = model_from_json(open('my_model.json').read())  
+# model.load_weights('my_model_weights.h5')
 
 model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
@@ -121,6 +121,6 @@ print('total prediction: ',X_test.shape[0])
 print('Score: ',score)
 
 # save model
-# json_string = model.to_json()
-# open("my_model.json","w").write(json_string)
-# model.save_weights('my_model_weights.h5')
+json_string = model.to_json()
+open("my_model.json","w").write(json_string)
+model.save_weights('my_model_weights.h5')
