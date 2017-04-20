@@ -11,7 +11,7 @@ There three main methods:
 Tesseract OCR and OpenCV use the second method. But the captcha is more and more complex now. There is a common phenomenon that the chars in the captcha interlace with one another, so the second method gets a low accuracy. This program focuses on the third method. 
 
 #Generate the captcha to train
-Acquire massive capthca by hunman is unrealistic. Fortunately, we can easily generate the captcha by the python package **captcha**.See the [get_captcha.py](www.baidu.com) in details.
+Acquire massive capthca by hunman is unrealistic. Fortunately, we can easily generate the captcha by the python package **captcha**.See the [get_captcha.py](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/code/get_train_set.py) in details.
 
 #Build the cnn model
 I build the network with [keras](https://github.com/fchollet/keras), using the theano backend. I think use keras raher than theano to code is much more convenient.     
