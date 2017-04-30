@@ -11,6 +11,8 @@ from __future__ import print_function
 import numpy as np
 np.random.seed(1337)  # for reproducibility
 
+import captcha_params
+
 from keras.models import Sequential
 from keras.utils import np_utils
 from keras import backend as K
@@ -23,7 +25,7 @@ import captcha_params
 import load_model
 
 # input image dimensions
-img_rows, img_cols = 60, 160
+img_rows, img_cols = captcha_params.get_height(), captcha_params.get_width()
 
 batch_size = 128
 nb_epoch = 64
@@ -33,7 +35,6 @@ CHAR_SET_LEN = captcha_params.get_char_set_len()
 
 
 # input image dimensions
-img_rows, img_cols = 60, 160
 # number of convolutional filters to use
 nb_filters1 = 32
 nb_filters2 = 64

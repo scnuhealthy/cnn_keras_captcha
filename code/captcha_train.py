@@ -22,7 +22,7 @@ import captcha_params
 import load_model
 
 # input image dimensions
-img_rows, img_cols = 60, 160
+img_rows, img_cols = captcha_params.get_height(), captcha_params.get_width()
 
 batch_size = 128
 nb_epoch = 640

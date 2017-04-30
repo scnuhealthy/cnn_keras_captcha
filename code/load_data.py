@@ -19,6 +19,10 @@ CHAR_SET = captcha_params.get_char_set()
 
 Y_LEN = captcha_params.get_y_len()
 
+height = captcha_params.get_height()
+width = captcha_params.get_width()
+
+
 
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
 # text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
@@ -60,7 +64,7 @@ def load_data(tol_num,train_num):
     # output,(X_train,y_train):trainging data
     # ouput,(X_test,y_test):test data
  
-    data = np.empty((tol_num,1,60,160),dtype="float32")
+    data = np.empty((tol_num, 1, height, width),dtype="float32")
     label = np.empty((tol_num,Y_LEN),dtype="uint8")
 
     # data dir
@@ -90,7 +94,7 @@ def load_data(tol_num,train_num):
 
 def load_image(img):
     tol_num = 1
-    data = np.empty((tol_num,1,60,160),dtype="float32")
+    data = np.empty((tol_num, 1, height, width),dtype="float32")
     img = Image.open(img).convert('L')
     arr = np.asarray(img,dtype="float32")
     data[0,:,:,:] = arr

@@ -6,6 +6,8 @@ import random
 import os
 import captcha_params
 
+height_p, width_p = captcha_params.get_height(), captcha_params.get_width()
+
 
 # generate  the captcha text randomly from the char lists above
 def random_captcha_text(char_set=captcha_params.get_char_set(), captcha_size=captcha_params.get_captcha_size()):
@@ -17,7 +19,7 @@ def random_captcha_text(char_set=captcha_params.get_char_set(), captcha_size=cap
  
 # generate the captcha text and image and save the image 
 def gen_captcha_text_and_image(i):
-	image = ImageCaptcha(width=160, height=60, font_sizes=[30])
+	image = ImageCaptcha(width=width_p, height=height_p, font_sizes=[30])
  
 	captcha_text = random_captcha_text()
 	captcha_text = ''.join(captcha_text)
