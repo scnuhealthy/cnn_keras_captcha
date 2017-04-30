@@ -96,6 +96,9 @@ def load_image(img):
     tol_num = 1
     data = np.empty((tol_num, 1, height, width),dtype="float32")
     img = Image.open(img).convert('L')
+    # Resize it.
+    img = img.resize((width, height), Image.ANTIALIAS)
+ 
     arr = np.asarray(img,dtype="float32")
     data[0,:,:,:] = arr
     return data
