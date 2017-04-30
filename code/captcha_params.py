@@ -4,8 +4,9 @@ ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
 
 MAX_CAPTCHA = 3
 
-WIDTH=160
-HEIGHT=60
+WIDTH=80
+HEIGHT=30
+
 
 def get_char_set():
 	return number+alphabet
@@ -19,8 +20,8 @@ def get_captcha_size():
 def get_y_len():
 	return MAX_CAPTCHA*get_char_set_len()
 
-def get_width
+def get_width()
     return WIDTH
 
-def get_height
+def get_height()
     return HEIGHT
