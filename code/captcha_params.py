@@ -20,8 +20,8 @@ def get_captcha_size():
 def get_y_len():
 	return MAX_CAPTCHA*get_char_set_len()
 
-def get_width()
+def get_width():
     return WIDTH
 
-def get_height()
+def get_height():
     return HEIGHT
