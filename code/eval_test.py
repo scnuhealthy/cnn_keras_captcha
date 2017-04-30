@@ -94,7 +94,9 @@ for i in range(X_test.shape[0]):
     true = []
     predict2 = []
     for j in range(MAX_CAPTCHA):
-        predict2.append(get_max(predict[i,CHAR_SET_LEN*j:(j+1)*CHAR_SET_LEN]))
+        char_index = get_max(predict[i,CHAR_SET_LEN*j:(j+1)*CHAR_SET_LEN])
+        char = captcha_params.get_char_set()[char_index]
+        predict2.append(char)
     if true == predict2:
         acc+=1
     if i<20:
@@ -103,4 +105,5 @@ for i in range(X_test.shape[0]):
 print('predict correctly: ',acc)
 print('total prediction: ',X_test.shape[0])
 print('Score: ',score)
+
 
