@@ -25,7 +25,7 @@ import load_model
 img_rows, img_cols = captcha_params.get_height(), captcha_params.get_width()
 
 batch_size = 128
-nb_epoch = 640
+nb_epoch = 200
 
 MAX_CAPTCHA = captcha_params.get_captcha_size()
 CHAR_SET_LEN = captcha_params.get_char_set_len()
@@ -63,7 +63,7 @@ filepath = load_model.get_weights_file()
 checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
 callbacks_list = [checkpoint]
 
-model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch, verbose=1, validation_data=(X_test,Y_test), callbacks=callbacks_list)
+model.fit(X_train, Y_train, batch_size=batch_size, epochs=nb_epoch, verbose=1, validation_data=(X_test,Y_test), callbacks=callbacks_list)
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 predict = model.predict(X_test,batch_size = batch_size,verbose = 0)

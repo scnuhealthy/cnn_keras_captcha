@@ -2,10 +2,10 @@ number = ['0','1','2','3','4','5','6','7','8','9']
 alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
-MAX_CAPTCHA = 3
+MAX_CAPTCHA = 5
 
-WIDTH=80
-HEIGHT=30
+WIDTH=100
+HEIGHT=40
 
 
 def get_char_set():

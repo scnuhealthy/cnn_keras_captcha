@@ -54,7 +54,7 @@ X_test = load_image(img)
 #(X_train, Y_train), (X_test, Y_test) = load_data(tol_num = 24000,train_num = 18000)
 
 
-X_test = X_test.reshape(X_test.shape[0], 1, img_rows, img_cols)
+X_test = X_test.reshape(X_test.shape[0], img_rows, img_cols, 1)
 input_shape = (1, img_rows, img_cols)
 
 X_test = X_test.astype('float32')

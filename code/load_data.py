@@ -71,9 +71,9 @@ def load_data(tol_num,train_num):
     imgs = os.listdir("data")
     
     for i in range(tol_num):
-
         # load the images and convert them into gray images
-        img = Image.open("data/"+imgs[i]).convert('L')
+        img = get_image_from_file("data/"+imgs[i])
+
         arr = np.asarray(img,dtype="float32")
         try:
             data[i,:,:,:] = arr
@@ -95,13 +95,18 @@ def load_data(tol_num,train_num):
 def load_image(img):
     tol_num = 1
     data = np.empty((tol_num, 1, height, width),dtype="float32")
-    img = Image.open(img).convert('L')
-    # Resize it.
-    img = img.resize((width, height), Image.ANTIALIAS)
- 
+
+    img = get_image_from_file(img)
+
     arr = np.asarray(img,dtype="float32")
     data[0,:,:,:] = arr
     return data
+
+def get_image_from_file(img):
+    img = Image.open(img).convert('L')
+    # Resize it.
+    img = img.resize((width, height), Image.BILINEAR)
+    return img
 
 # return the index of the max_num in the array
 def get_max(array):
