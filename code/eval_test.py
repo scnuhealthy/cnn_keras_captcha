@@ -3,38 +3,55 @@ import sys
 from load_data import *
 import captcha_params
 import load_model
-
-# input image dimensions
-img_rows, img_cols = captcha_params.get_height(), captcha_params.get_width()
-
+import io
+from PIL import Image
 
 MAX_CAPTCHA = captcha_params.get_captcha_size()
 CHAR_SET_LEN = captcha_params.get_char_set_len()
 
+class CaptchaEval:
 
-# the data, shuffled and split between train and test sets
-img = sys.argv[1]
+	def __init__(self):
+		# load the trained model
+		self.model = load_model.get_model('')
 
-X_test = get_x_input_from_file(img)
+		self.model.compile(loss='categorical_crossentropy',
+		              optimizer='adadelta',
+		              metrics=['accuracy'])
 
-# load the trained model
-model = load_model.get_model('')
-
-model.compile(loss='categorical_crossentropy',
-              optimizer='adadelta',
-              metrics=['accuracy'])
-
-predict = model.predict(X_test)
+   
+	def predict_from_img(self):
+		X_test = get_x_input_from_image(img)
 
 
-text = ''
-for i in range(X_test.shape[0]):
-    true = []
-    predict2 = []
-    for j in range(MAX_CAPTCHA):
-        char_index = get_max(predict[i,CHAR_SET_LEN*j:(j+1)*CHAR_SET_LEN])
-        char = captcha_params.get_char_set()[char_index]
-        predict2.append(char)
-    text = text.join(predict2)
+		predict = self.model.predict(X_test)
 
-print(text)
+
+		text = ''
+		for i in range(X_test.shape[0]):
+		    true = []
+		    predict2 = []
+		    for j in range(MAX_CAPTCHA):
+		        char_index = get_max(predict[i,CHAR_SET_LEN*j:(j+1)*CHAR_SET_LEN])
+		        char = captcha_params.get_char_set()[char_index]
+		        predict2.append(char)
+		    text = text.join(predict2)
+
+		return text
+
+
+if len(sys.argv) == 2:
+	fileName = sys.argv[1]
+	with open(fileName, mode='rb') as file: # b is important -> binary
+	    fileContent = file.read()
+
+	stream = io.BytesIO(fileContent)
+
+	img = Image.open(stream)
+
+	captchaEval = CaptchaEval()
+
+	text = captchaEval.predict_from_img()
+
+	print (text)
+
