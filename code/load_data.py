@@ -27,35 +27,35 @@ width = captcha_params.get_width()
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
 # text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
 def text2vec(text):
-	text_len = len(text)
-	if text_len > MAX_CAPTCHA:
-		raise ValueError(MAX_CAPTCHA)
+    text_len = len(text)
+    if text_len > MAX_CAPTCHA:
+        raise ValueError(MAX_CAPTCHA)
         # the shape of the vector is 1*(MAX_CAPTCHA*CHAR_SET_LEN)
-	vector = np.zeros(MAX_CAPTCHA*CHAR_SET_LEN)
-	def char2pos(c):
-		k = CHAR_SET.index(c)
-		return k
-	for i, c in enumerate(text):
-		idx = i * CHAR_SET_LEN + char2pos(c)
-		vector[idx] = 1
-	return vector
+    vector = np.zeros(MAX_CAPTCHA*CHAR_SET_LEN)
+    def char2pos(c):
+        k = CHAR_SET.index(c)
+        return k
+    for i, c in enumerate(text):
+        idx = i * CHAR_SET_LEN + char2pos(c)
+        vector[idx] = 1
+    return vector
 
 
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
 # text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
 def text2vec2(text):
-	text_len = len(text)
-	if text_len > MAX_CAPTCHA:
-		raise ValueError('max4')
+    text_len = len(text)
+    if text_len > MAX_CAPTCHA:
+        raise ValueError('max4')
         # the shape of the vector is 1*(MAX_CAPTCHA*CHAR_SET_LEN)
-	vector = np.zeros(MAX_CAPTCHA)
-	def char2pos(c):
-		k = 30
-		return k
-	for i, c in enumerate(text):
-		idx = i
-		vector[idx] = char2pos(c)
-	return vector
+    vector = np.zeros(MAX_CAPTCHA)
+    def char2pos(c):
+        k = 30
+        return k
+    for i, c in enumerate(text):
+        idx = i
+        vector[idx] = char2pos(c)
+    return vector
 
 def load_data(tol_num,train_num):
       
@@ -121,3 +121,14 @@ def get_text(array):
     for i in range(len(array)):
         text.append(CHAR_SET[array[i]])
     return text
+
+def get_x_input_from_file(img):
+    X_test = load_image(img)
+
+    X_test = X_test.reshape(X_test.shape[0], height, width, 1)
+    
+
+    X_test = X_test.astype('float32')
+    X_test /= 255
+
+    return X_test
