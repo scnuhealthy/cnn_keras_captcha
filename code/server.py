@@ -12,7 +12,7 @@ app = Flask(__name__)
 captchaEval = CaptchaEval()
 
 
-@app.route('/', methods=['POST'])
+@app.route('/captcha', methods=['POST'])
 def index():
 
     fileContent = request.files['file']
@@ -26,7 +26,7 @@ def index():
     return text
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host='0.0.0.0', debug=False)
 
 
-#curl -i -X POST -F file=@/tmp/resized.png  http://127.0.0.1:5000/
+#curl -i -X POST -F file=@/tmp/resized.png  http://127.0.0.1:5000/captcha
