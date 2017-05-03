@@ -23,6 +23,19 @@ height = captcha_params.get_height()
 width = captcha_params.get_width()
 
 
+# return the index of the max_num in the array
+def get_max(array):
+    max_num = max(array)
+    for i in range(len(array)):
+        if array[i] == max_num:
+            return i
+
+def get_text(array):
+    text = []
+    max_num = max(array)
+    for i in range(len(array)):
+        text.append(CHAR_SET[array[i]])
+    return text
 
 # text to vector.For example, if the char set is 1 to 10,and the MAX_CAPTCHA is 1
 # text2vec(1) will return [0,1,0,0,0,0,0,0,0,0]
@@ -96,39 +109,42 @@ def load_image(img):
     tol_num = 1
     data = np.empty((tol_num, 1, height, width),dtype="float32")
 
-    img = get_image_from_file(img)
+    img = pre_process_image(img)
 
     arr = np.asarray(img,dtype="float32")
     data[0,:,:,:] = arr
     return data
 
-def get_image_from_file(img):
-    img = Image.open(img).convert('L')
+
+def pre_process_image(img):
+    img = img.convert('L')
     # Resize it.
     img = img.resize((width, height), Image.BILINEAR)
+
     return img
 
-# return the index of the max_num in the array
-def get_max(array):
-    max_num = max(array)
-    for i in range(len(array)):
-        if array[i] == max_num:
-            return i
-
-def get_text(array):
-    text = []
-    max_num = max(array)
-    for i in range(len(array)):
-        text.append(CHAR_SET[array[i]])
-    return text
 
 def get_x_input_from_file(img):
+    with open(fileName, mode='rb') as file: # b is important -> binary
+        fileContent = file.read()
+
+    stream = io.BytesIO(r_data)
+
+    img = Image.open(stream)
+
+    X_test = get_x_input_from_image(img)
+
+    return X_test
+
+def get_x_input_from_image(img):
     X_test = load_image(img)
 
     X_test = X_test.reshape(X_test.shape[0], height, width, 1)
-    
 
     X_test = X_test.astype('float32')
     X_test /= 255
 
     return X_test
+
+
+

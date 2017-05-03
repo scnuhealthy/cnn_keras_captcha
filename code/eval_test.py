@@ -20,7 +20,7 @@ class CaptchaEval:
 		              metrics=['accuracy'])
 
    
-	def predict_from_img(self):
+	def predict_from_img(self, img):
 		X_test = get_x_input_from_image(img)
 
 
@@ -47,11 +47,11 @@ if len(sys.argv) == 2:
 
 	stream = io.BytesIO(fileContent)
 
-	img = Image.open(stream)
+	localImage = Image.open(stream)
 
 	captchaEval = CaptchaEval()
 
-	text = captchaEval.predict_from_img()
+	text = captchaEval.predict_from_img(localImage)
 
 	print (text)
 
