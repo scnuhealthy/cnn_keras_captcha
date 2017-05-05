@@ -105,6 +105,10 @@ def load_data(tol_num,train_num):
     
     return (X_train,y_train),(X_test,y_test)
 
+def get_image_from_file(path_img):
+    img = Image.open(path_img)
+    return pre_process_image(img)
+
 def load_image(img):
     tol_num = 1
     data = np.empty((tol_num, 1, height, width),dtype="float32")
