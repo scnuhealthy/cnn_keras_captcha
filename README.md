@@ -57,6 +57,12 @@ We can see the program successfully recognize "4063" , but fail "7229". The chat
 
 # Try yourself
 ## Environment
-My Environment is Windows10 with Anaconda. Anaconda should install the package theano,keras and capthca.
+My Environment is Mac with Anaconda. Anaconda should install the package tensorflow,keras and capthca.
 ## Run my program
-You can run my program by downloading my code, running get_train_set.py  and  then captcha_recognition.py. Program get_captcha.py will generate the captchas and Program recognize_captcha.py will build the model. Once you run the captcha_recognition.py, you can get the training model file(my_model.json and my_model_weights.h5). With those files, you can load the model directly and recognize the captcha around the corner.
+- get_captcha.py: Generate the sample captchas
+- captcha_train.py: Train the model
+- eval_test.py: Solve an image 
+```
+	python eval_test.py data/50_7136.png
+```
+It works pretty well in order to solve captcha created from other libraries such phpcaptcha or using letters and more than 4 characters :)
