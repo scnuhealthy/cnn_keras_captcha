@@ -18,26 +18,25 @@ I build the network with [keras](https://github.com/fchollet/keras), using the t
 The network includes three convolution layers and two full-connected layers. Owing to CNN needs a large amount of samples to train, with the limitation of time and resources, I only use digital number as the char set of the captcha. So output of the model has 4*10 numbers, while is will have 4*62 numbers if the char set includes ppercase and lowercase letters.
 ```python
 # 3 conv layer
-model.add(Convolution2D(nb_filters1, kernel_size[0], kernel_size[1],
-                        border_mode='valid',
-                        input_shape=input_shape))
+model.add(Conv2D(nb_filters1, (kernel_size[0], kernel_size[1]), padding='valid', input_shape=input_shape))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=pool_size))
 model.add(Dropout(0.25))
 
-model.add(Convolution2D(nb_filters2, kernel_size[0], kernel_size[1]))
+model.add(Conv2D(nb_filters2, (kernel_size[0], kernel_size[1])))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=pool_size))
 model.add(Dropout(0.25))
 
-model.add(Convolution2D(nb_filters3, kernel_size[0], kernel_size[1]))
+model.add(Conv2D(nb_filters3, (kernel_size[0], kernel_size[1])))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=pool_size))
 model.add(Dropout(0.25))
 
 # Fully connected layer
 model.add(Flatten())
-model.add(Dense(512))
+model.add(Dense(1024*MAX_CAPTCHA))
+model.add(Dense(512*MAX_CAPTCHA))
 model.add(Activation('relu'))
 model.add(Dropout(0.25))
 model.add(Dense(MAX_CAPTCHA*CHAR_SET_LEN))
@@ -49,7 +48,7 @@ model.compile(loss='categorical_crossentropy',
 ```
 
 # The training result    
-I use 18000 training samples and 6000 test samples. After 64 epochs of training, the model obtains the correct rate of 63.9% on the test data.There is part of the result following:    
+I use 18000 training samples and 6000 test samples. After 64 epochs of training, the model obtains the correct rate of 97.91% on the test data.There is part of the result following:    
 
 ![test_result](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/picture/test_result.jpg)  
 ![4063](https://github.com/scnuhealthy/cnn_keras_captcha/blob/master/picture/9_4063.jpg)    
