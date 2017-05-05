@@ -25,7 +25,7 @@ import load_model
 img_rows, img_cols = captcha_params.get_height(), captcha_params.get_width()
 
 batch_size = 128
-nb_epoch = 200
+nb_epoch = 64
 
 MAX_CAPTCHA = captcha_params.get_captcha_size()
 CHAR_SET_LEN = captcha_params.get_char_set_len()
@@ -33,7 +33,7 @@ CHAR_SET_LEN = captcha_params.get_char_set_len()
 
 
 # the data, shuffled and split between train and test sets
-(X_train, Y_train), (X_test, Y_test) = load_data(tol_num = 25000,train_num = 20000)
+(X_train, Y_train), (X_test, Y_test) = load_data(tol_num = 24000,train_num = 18000)
 
 # i use the theano backend
 if K.image_dim_ordering() == 'th':
