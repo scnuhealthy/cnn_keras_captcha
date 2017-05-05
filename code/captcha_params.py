@@ -2,14 +2,14 @@ number = ['0','1','2','3','4','5','6','7','8','9']
 alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
-MAX_CAPTCHA = 5
+MAX_CAPTCHA = 4
 
 WIDTH=100
 HEIGHT=40
 
 
 def get_char_set():
-	return number+alphabet
+	return number#+alphabet
 
 def get_char_set_len():
 	return len(get_char_set())
