@@ -100,8 +100,8 @@ model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
               metrics=['accuracy'])
 
-# model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch,
-      #       verbose=1, validation_data=(X_test,Y_test))
+model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch,
+            verbose=1, validation_data=(X_test,Y_test))
 
 score = model.evaluate(X_test, Y_test, verbose=0)
 predict = model.predict(X_test,batch_size = batch_size,verbose = 0)
