@@ -4,8 +4,8 @@ ALPHABET = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
 
 MAX_CAPTCHA = 4
 
-WIDTH=100
-HEIGHT=40
+WIDTH=160
+HEIGHT=60
 
 
 def get_char_set():
