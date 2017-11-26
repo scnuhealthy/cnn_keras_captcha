@@ -57,7 +57,7 @@ We can see the program successfully recognize "4063" , but fail "7229". The chat
 
 # Try yourself
 ## Environment
-My Environment is Mac with Anaconda. Anaconda should install the package tensorflow,keras and capthca.
+My Environment is Windows with Anaconda. Anaconda should install the package theano,keras and capthca.
 ## Run my program
 - get_captcha.py: Generate the sample captchas
 - captcha_train.py: Train the model
